@@ -17,7 +17,7 @@ def snippet_new(request):
             snippet = form.save(commit=False)
             snippet.created_by = request.user
             snippet.save()
-            return redirect(snippet_detail, snippet_id=snippet.pkz)
+            return redirect(snippet_detail, snippet_id=snippet.pk)
     else:
         form = SnippetForm()
     return render(request, "snippets/snippet_new.html", {'form': form})
@@ -29,9 +29,9 @@ def snippet_edit(request, snippet_id):
         return HttpResponseForbidden("このスニペットの編集は許可されていません。")
     if request.method == "POST":
         form = SnippetForm(request.POST, instance=snippet)
-    if form.is_valid():
-        form.save()
-        return redirect('snippet_detail', snippet_id=snippet_id)
+        if form.is_valid():
+            form.save()
+            return redirect('snippet_detail', snippet_id=snippet_id)
     else:
         form = SnippetForm(instance=snippet)
     return render(request, 'snippets/snippet_edit.html', {'form': form})
