@@ -1,3 +1,4 @@
+{% load static %}
 {% load django_bootstrap5 %}
 <html>
     <head>
@@ -5,6 +6,7 @@
         <title>Djangoスニペット</title>
         {% bootstrap_css %}
         {% bootstrap_javascript %}
+        <link rel="stylesheet" href="{% static 'snippets/css/style.css' %}">
     </head>
     <body>
         <nav class="navbar nabbar-expand flex-md-row navbar-dark bg-dark">
